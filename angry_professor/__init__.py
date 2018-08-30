@@ -19,18 +19,18 @@ def angryProfessor(k, a):
         return "NO"
 
 if __name__ == '__main__':
-    fptr = open('output02', 'w')
+    fptr = open('output02.txt', 'w')
     fptrInput = open('input03.txt', 'w')
-    t = int(input())
+    t = fptrInput.readline() # int(input())
 
     for t_itr in range(t):
-        nk = input().split()
+        nk = fptrInput.readline().split()
 
         n = int(nk[0])
 
         k = int(nk[1])
 
-        a = list(map(int, input().rstrip().split()))
+        a = list(map(int, fptrInput().readline().rstrip().split()))
 
         result = angryProfessor(k, a)
 

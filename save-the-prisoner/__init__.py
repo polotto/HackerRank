@@ -11,12 +11,23 @@ def saveThePrisoner(n, m, s):
     # n prinsioners
     # m sweets
     # s start seat
-    return math.ceil(m/n + s)
+    # The count does't start in the position 0
+    # the % operator return a full circle turn
+    # include that the same prisioner that started
+    # so, need add -1 to remove the count of the prisioner that started 
+    result = int(m + s) % int(n) - int(1)
+    # if less then 0 other positions before last received the candy
+    if result < 0:
+        result = n + result
+    # if == 0 , the last prisoner will receive the candy
+    if result == 0:
+        result = n
+    return result
 
 if __name__ == '__main__':
     scr_dir = os.path.dirname(__file__)
-    fptr_in = open(os.path.join(scr_dir, './input03.txt'), 'r')
-    fptr = open(os.path.join(scr_dir, './output03.txt'), 'w')
+    fptr_in = open(os.path.join(scr_dir, './input05.txt'), 'r')
+    fptr = open(os.path.join(scr_dir, './output.txt'), 'w')
 
     t = int(fptr_in.readline())
 

@@ -11,22 +11,16 @@ def circularArrayRotation(a, k, queries):
     # right rotation in python, based in
     # https://stackoverflow.com/a/46846544/7468664
     # https://stackoverflow.com/a/9457923/7468664
-    if len(a) >= k :
-        result = a[-k:] + a[:-k]
-    else:
-        # for big k, rotate one by one
-        result = a
-        for _ in range(k):
-            for i in range(len(a)):
-                j = i + 1
-                if j == len(a):
-                    result[0] = a[i]
-                else:
-                    result[j] = a[i]
+
+    # if the size of k > len(a), rotate only necessary with
+    # module of the division
+    rotations = k % len(a)
+    rotated = a[-rotations:] + a[:-rotations]
     
     q_result = []
-    for q in queries:
-        q_result.append(result[q])
+    for i in queries:
+        q_result.append(rotated[i])
+        
     return q_result
 
 if __name__ == '__main__':

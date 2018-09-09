@@ -1,0 +1,41 @@
+1)
+We estimate the LTV considering the following values:
+
+Value each user spends per day: $0.45 (V variable in the equation);
+The values of the user retention in the Table 1 divided by 100 (DayN variable in the equation);
+
+Then,
+LTV =  V * ( Day0 + ... + Day7)
+LTV = 0.45 * (1 + 0.344 + 0.244 + 0.203 + 0.179 + 0.164 + 0.154 + 0.146) = $1.0953
+ 
+2)
+In the solution, the following problems can be found:
+1 - The solution always considers that all the users spends $0.45 per day but this is not true because some user may not made in app purchases.
+2 - The solution always don't considers that some users may make purchases bigger then $0.45.
+3 - The solution considers that a user spends every day in the app, but this may be not true, a user can made a purchase in the day 0 but not in the day 1.
+
+To improve that the solution, we need know how much each user spends per day in the app, so, the equation can be rewritten:
+
+LTV = (V0 + V1 + ... + V7)/N
+
+Where:
+Vn is the amount of money spent for all the users in the app in the day N. 
+N is the number of user that installed the app in the day 0.
+
+3)
+The profits can be calculated with following equation:
+
+P = LTV*(Dp + Df) - (CPI * Dp)
+
+Where:
+P is the profit;
+LTV is the Life Time Value;
+Dp is the number of paid downloads;
+Df is the number of free downloads;
+CPI is the cost per install;
+
+To maximize the profits, we need reduce the CPI.
+
+The main limitations are:
+1 - LTV is a average value, so, the P is also a average;
+2 - CPI is a average too, so, that can infers in the precision of the result;

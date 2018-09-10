@@ -24,34 +24,52 @@ def mult_sum(a, b):
             
     return sum
 
-def hourglass(pos):
-    if pos == 0:
-        hg = [[1, 1, 1, 0, 0, 0], 
-              [0, 1, 0, 0, 0, 0], 
-              [1, 1, 1, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0]]
-        
+def hourglass(kr, kc):
+    hg = [[1, 1, 1, 0, 0, 0], 
+          [0, 1, 0, 0, 0, 0], 
+          [1, 1, 1, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0]]
+    hg_rot = []
+    for r in hg:
+        hg_rot.append(r[-kr:] + r[:-kr])
     
+    hg_rot = hg_rot[-kc:] + hg_rot[:-kc]
+    
+    return hg_rot
 
 # Complete the hourglassSum function below.
 def hourglassSum(arr):
-    
-    
-    print(mult_sum(hg, arr))
+    max_sum = -10**9
+    for i in range(4):
+        for j in range(4):
+            hg = hourglass(i, j)
+            ans = mult_sum(hg, arr)
+            max_sum = ans if ans > max_sum else max_sum
             
+    return max_sum            
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    path = os.path.dirname(__file__)
+    fptr = open(os.path.join(path, './output.txt'), 'w')
 
+    test = '''-1 -1 0 -9 -2 -2
+-2 -1 -6 -8 -2 -5
+-1 -1 -1 -2 -3 -4
+-1 -9 -2 -4 -4 -5
+-7 -3 -3 -2 -9 -9
+-1 -3 -1 -2 -4 -5'''.split('\n')
+    
     arr = []
 
-    for _ in range(6):
-        arr.append(list(map(int, input().rstrip().split())))
+    for i in range(6):
+        arr.append(list(map(int, test[i].rstrip().split())))
 
+    print(arr)
     result = hourglassSum(arr)
 
+    print(result)
     fptr.write(str(result) + '\n')
 
     fptr.close()

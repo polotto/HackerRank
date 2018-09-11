@@ -1,0 +1,54 @@
+b07e4222f2bd7c0b8f8eab9ce3ee80
+200.185.140.133
+tivit-mobile-runner
+
+interface BaseContract {
+
+    showProgress()
+    hideProgress()
+}
+
+
+interface Contract extends BaseContract {
+
+    interface View {
+        populate(models: [Model])
+    }
+
+    interface Service {
+        load()
+    }
+}
+
+class Activity implements Contract.View {
+
+    presenter: Presenter
+
+    onCreate() {
+        this.presenter = Presenter(this)
+    }
+
+    onResume() {
+        this.presenter.load()
+    }
+
+    populate(models: [Model]) {
+        // popula a lista
+    }
+}
+
+class Presenter implements Contract.Service {
+
+    view: Contract.View
+
+    constructor(view: Contract.View) {
+        this.view = view
+    }
+
+    load() {
+        this.view.showProgress()
+        // carrega
+        this.view.hideProgress()
+        this.view.populate(models)
+    }
+}

@@ -12,8 +12,10 @@ def minimumBribes(q):
     for i in range(1, len(q) + 1):
         for j in range(1, len(q) + 1):
             p = q[j-1]
-            print(i, p, j)
             if p == i and j < i:
+                d.append(abs(j - i))
+            elif p == i and len(q) > j and q[j] < p :
+                print(i, p, j)
                 d.append(abs(j - i))
     
     print(d)
@@ -39,6 +41,9 @@ if __name__ == '__main__':
 7 - 2
 8 - 2
 6 - 1
+
+1 2 5 3 7 8 6 4
+
 1 2 3 4 5 6 7 8
 
 1 2 5 3 4 6 7 8

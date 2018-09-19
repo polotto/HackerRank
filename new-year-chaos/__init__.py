@@ -9,7 +9,7 @@ import sys
 # Complete the minimumBribes function below.
 def minimumBribes(q):
     r = list(range(1, len(q) + 1))
-    d = []
+    d = 0
     for i in range(len(q)):
         if r[i] != q[i]:
             print(r)
@@ -17,15 +17,12 @@ def minimumBribes(q):
             print(ir, q[i] - 1)
             a = r.pop(ir)
             r.insert(i, a)
-            d.append(abs(ir - i))
-            print(q)
-            print(r)
-            print()
-    if max(d) > 2:
-        print('Too chaotic')
-        return
-    ans = sum(d)
-    print(ans)
+            
+            if abs(ir - i) > 2:
+                print('Too chaotic')
+                return
+            d = d + abs(ir - i)
+    print(d)
     
 ##    d = []
 ##    for i in range(1, len(q) + 1):

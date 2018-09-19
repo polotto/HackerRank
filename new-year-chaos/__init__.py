@@ -12,9 +12,9 @@ def minimumBribes(q):
     d = 0
     for i in range(len(q)):
         if r[i] != q[i]:
-            print(r)
-            ir = r.index(q[i], q[i] - 1)
-            print(ir, q[i] - 1)
+            #print(r)
+            ir = r.index(q[i], q[i] - 1, q[i] + 10)
+            #print(ir, q[i] - 1)
             a = r.pop(ir)
             r.insert(i, a)
             
@@ -23,31 +23,10 @@ def minimumBribes(q):
                 return
             d = d + abs(ir - i)
     print(d)
-    
-##    d = []
-##    for i in range(1, len(q) + 1):
-##        for j in range(1, len(q) + 1):
-##            p = q[j-1]
-##            if p == i and j < i:
-##                d.append(abs(j - i))
-##            elif p == i and len(q) > j and q[j] < p :
-##                print(i, p, j)
-##                d.append(abs(j - i))
-##    
-##    print(d)
-##
-##    for k in d:
-##        if k > 2:
-##            print('Too chaotic')
-##            return
-##    ans = sum(d)
-##    print(ans)
-                
 
 if __name__ == '__main__':
     dir_scr = os.path.dirname(__file__)
-    input_tests = open(os.path.join(dir_scr, './input09.txt'), 'r')
-    
+    input_tests = open(os.path.join(dir_scr, './input08.txt'), 'r')
     
     t = int(input_tests.readline())
 

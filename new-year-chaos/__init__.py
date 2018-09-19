@@ -8,40 +8,19 @@ import random
 import re
 import sys
 
-def mergeSort(alist, ans):
-    # print("Splitting ",alist)
-    if len(alist)>1:
-        mid = len(alist)//2
-        lefthalf = alist[:mid]
-        righthalf = alist[mid:]
+# http://interactivepython.org/courselib/static/pythonds/SortSearch/TheInsertionSort.html
+def insertionSort(alist, ans):
+   for index in range(1,len(alist)):
 
-        mergeSort(lefthalf, ans)
-        mergeSort(righthalf, ans)
+     currentvalue = alist[index]
+     position = index
 
-        i=0
-        j=0
-        k=0
-        while i < len(lefthalf) and j < len(righthalf):
-            if lefthalf[i] > righthalf[j]:
-                ans[0] += 1
-            if lefthalf[i] < righthalf[j]:
-                alist[k]=lefthalf[i]
-                i=i+1
-            else:
-                alist[k]=righthalf[j]
-                j=j+1
-            k=k+1
+     while position>0 and alist[position-1]>currentvalue:
+         ans[0] += 1
+         alist[position]=alist[position-1]
+         position = position-1
 
-        while i < len(lefthalf):
-            alist[k]=lefthalf[i]
-            i=i+1
-            k=k+1
-
-        while j < len(righthalf):
-            alist[k]=righthalf[j]
-            j=j+1
-            k=k+1
-    # print("Merging ",alist)
+     alist[position]=currentvalue
 
 # Complete the minimumBribes function below.
 def minimumBribes(q):
@@ -52,10 +31,11 @@ def minimumBribes(q):
         if (v - 1) - i > 2:
             print('Too chaotic')
             return
+    
+    insertionSort(q, ans)
+    print(ans[0])
 
-    mergeSort(q, ans)
-    print(ans)
-
+# first ans worst solution
 def minimumBribes2(q):
     r = list(range(1, len(q) + 1))
     ans = 0

@@ -9,10 +9,9 @@ import sys
 # Complete the minimumSwaps function below.
 def minimumSwaps(arr):
     ans = 0
-    for passnum in range(len(arr)-1, 0, -1):
-        print(passnum)
-        for i in range(passnum):
-            if arr[i] > arr[i+1]:
+    for pivot in range(len(arr)):
+        for i in range(arr):
+            if arr[pivot] > arr[i+1]:
                 a = arr[i]
                 b = arr[i+1]
                 arr[i+1] = a

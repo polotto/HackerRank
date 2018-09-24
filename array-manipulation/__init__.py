@@ -12,9 +12,9 @@ def arrayManipulation(n, queries):
     maximum = 0
     q_previous = [0,n]
     for q in queries:
-        if q[0] >= q_previous[0] and q[1] <= q_previous[1]:
-            maximum += q[2]
-            q_previous = q
+        #if q[0] >= q_previous[0] and q[1] <= q_previous[1]:
+        maximum += q[2]
+        #q_previous = q
     
     return maximum
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     start = timer()
     scr_dir = os.path.dirname(__file__)
     fptr = open(os.path.join(scr_dir, './output.txt'), 'w')
-    fptr_in = open(os.path.join(scr_dir, './input00.txt'), 'r')
+    fptr_in = open(os.path.join(scr_dir, './input04.txt'), 'r')
 
     nm = fptr_in.readline().split()
 

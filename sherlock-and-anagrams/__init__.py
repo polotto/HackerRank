@@ -8,22 +8,23 @@ import sys
 
 def sherlockAndAnagrams(s):
     s_hash = {}
-    max_len = len(s) + 1
-    for i in range(max_len):
-        for j in range(max_len - i):
-            # sort and convert list to string
-            aux = ''.join(map(str, sorted(s[j:j+i])))
-            # remove empty strings
-            if not aux:
-                continue
-            # create a hash
-            elif not aux in s_hash:
-                print('new hash', aux)
-                s_hash[aux] = 1
-            # increment if already exists
-            else:
-                print('already hash', aux)
-                s_hash[aux] += 1
+    max_len = len(s)
+    for c in range(1, max_len - 1):
+        for i in range(max_len):
+            for j in range(i, max_len-i):
+                # sort and convert list to string
+                s_i = ''.join(map(str, sorted(s[i:c])))
+                s_j = ''.join(map(str, sorted(s[j:c])))
+                key = s_i + s_j
+                # remove empty strings
+                # if not s_i or not s_j:
+                #    continue
+                # create a hash
+                if not key in s_hash:
+                    s_hash[key] = 1
+                # increment if already exists
+                else:
+                    s_hash[key] += 1
     
     print(s_hash)
     ans = 0

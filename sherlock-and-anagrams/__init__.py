@@ -8,6 +8,7 @@ import sys
 from timeit import default_timer as timer
 
 def sherlockAndAnagrams(s):
+    # variables initialization
     s_hash = {}
     max_len = len(s)
 

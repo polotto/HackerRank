@@ -10,30 +10,36 @@ from random import randint
 
 # Complete the countTriplets function below.
 def countTriplets(arr, r):
-    triplets = {}
+    # initialize the dictionaries
+    r2 = {}
+    r3 = {}
+    count = 0
+
+    # loop throgh the arr itens
+    for k in arr:
+        # if k in r3 indicates the triplet already completed,
+        # the count need be incremented
+        if k in r3:
+            count += r3[k]
+        
+        # if k in r2, it is the secound number of the triplet,
+        # your successor (third element k*r) need be added or incremented in the r3 dict
+        # because is a potencial triplet 
+        if k in r2:
+            if k*r in r3:
+                r3[k*r] += r2[k]
+            else:
+                r3[k*r] = r2[k]
+
+        # else, k is the first element of the triplet, so,
+        # your seccessor (secound element k*r) need be added or incremented in the r2 dict
+        # because is a potencial triplet
+        if k*r in r2:
+            r2[k*r] += 1
+        else:
+            r2[k*r] = 1
     
-    for i in range(len(arr)):
-        arr_i = arr[i]
-        
-        arr_i_r_r = arr_i / (r * r)
-        if arr_i_r_r in triplets:
-            print('rr ',arr_i, arr_i_r_r)
-            triplets[arr_i_r_r] += 1
-            continue
-        
-        arr_i_r = arr_i / r
-        if arr_i_r in triplets:
-            print('r ', arr_i, arr_i_r)
-            triplets[arr_i_r] += 1
-            continue
-        
-        if (arr_i == r or arr_i == 1) and (not arr_i in triplets):
-            print('a0 ', arr_i)
-            triplets[arr_i] = 1
-            continue
-            
-    print(triplets)
-    return sum([v for (k,v) in triplets.items()])
+    return count
 
 def countTripletsBruteForce(arr, r):
     triplets = {}
@@ -53,7 +59,7 @@ if __name__ == '__main__':
 
     scr_dir = os.path.dirname(__file__)
     fptr = open(os.path.join(scr_dir, './output.txt'), 'w')
-    fptr_input = open(os.path.join(scr_dir, './input/input01.txt'), 'r')
+    fptr_input = open(os.path.join(scr_dir, './input/input00.txt'), 'r')
 
     nr = fptr_input.readline().rstrip().split()
 

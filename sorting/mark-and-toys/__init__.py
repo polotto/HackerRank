@@ -16,21 +16,33 @@ def bubleSort(a):
         j += 1
 
 def countingSort2(a):
-    count = [0] * (max(a) + 1)
+    aux = []
     for x in a:
-        count[x] += 1
-    
+        for i in range(len(aux)):
+            if aux[i][0] > x:
+                aux[i-1:i-1] = [[x, 1]]
+                break
+            
+    print(aux)
+
+    count = Counter()
+    for i in aux:
+        count[i[0]] = i[1]
+    print(count)
+
     total = 0
-    for i in range(len(count)):
-        oldCount = count[i]
-        count[i] = total
+    for (k,v) in count.items():
+        print(k)
+        oldCount = count[k]
+        count[k] = total
         total += oldCount
 
+    print(count)
     output = [0] * len(a)
     for x in a:
         output[count[x]] = x
         count[x] -= 1
-
+    print(output)
     return output
 
 def countingSort(a):
@@ -55,6 +67,7 @@ def countingSort(a):
 # Complete the maximumToys function below.
 def maximumToys(prices, k):
     prices = sorted(prices)
+    
     total_price = 0
     total_toys = 0
     for toy in prices:

@@ -6,52 +6,40 @@ import random
 import re
 import sys
 from collections import defaultdict
+from timeit import default_timer as timer
 
 # Complete the commonChild function below.
+# function LCSLength(X[1..m], Y[1..n])
+#     C = array(0..m, 0..n)
+#     for i := 0..m
+#        C[i,0] = 0
+#     for j := 0..n
+#        C[0,j] = 0
+#     for i := 1..m
+#         for j := 1..n
+#             if X[i] = Y[j]
+#                 C[i,j] := C[i-1,j-1] + 1
+#             else
+#                 C[i,j] := max(C[i,j-1], C[i-1,j])
+#     return C[m,n]
+# https://pypy.org/download.html#default-with-a-jit-compiler
+# https://en.wikipedia.org/wiki/Longest_common_subsequence_problem
+# https://www.martinkysel.com/hacker-rank-common-child-solution/
 def commonChild(s1, s2):
-    common = list(set(s1).intersection(s2))
-    s1_common = [n for n in s1 if n in common]
-    s2_common = [n for n in s2 if n in common]
-    # s1_common = s1
-    # s2_common = s2
-
-    if len(s1_common) > len(s2_common):
-        s1_common, s2_common = s2_common, s1_common
-
-    print(s1)
-    print(s2)
-
-    common_child = []
-    i = 0
-    while i < len(s1_common):
-        s1_i = s1_common[i]
-        if s1_i in s2_common:
-            j = s2_common.index(s1_i)
-            s1_common.pop(i)
-            s2_common.pop(j)
-            common_child.append(s1_i)
-        i += 1
-
-    # k = 0
-    # for i in range(len(s1_common)):
-    #     s1_i = s1_common[i]
-    #     for j in range(k, len(s2_common)):
-    #         if s1_i == s2_common[j]:
-    #             common_child.append(s1_i)
-    #             k = j + 1
-    #             break
-
-
-    print(''.join(map(str, s1_common)))
-    print(''.join(map(str, s2_common)))
-    print(common_child)
-    
-    return  len(common_child)
+    common = [[0 for j in range(len(s2) + 1)] for i in range(len(s1) + 1)]
+    for i, s_i in enumerate(s1):
+        for j, s_j in enumerate(s2):
+            if s_i == s_j:
+                common[i + 1][j + 1] = common[i][j] + 1
+            else:
+                common[i + 1][j + 1] = max(common[i + 1][j], common[i][j + 1])
+    return  common[-1][-1]
 
 if __name__ == '__main__':
+    start = timer()
     scr_dir = os.path.dirname(__file__)
     fptr = open(os.path.join(scr_dir, './output/output.txt'), 'w')
-    fptr_input = open(os.path.join(scr_dir, './input/input02.txt'), 'r')
+    fptr_input = open(os.path.join(scr_dir, './input/input05.txt'), 'r')
     
     s1 = fptr_input.readline().rstrip()
 
@@ -64,3 +52,4 @@ if __name__ == '__main__':
     fptr.close()
 
     print(result)
+    print(timer() - start)

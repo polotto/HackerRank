@@ -12,68 +12,46 @@ def commonChild(s1, s2):
     common = list(set(s1).intersection(s2))
     s1_common = [n for n in s1 if n in common]
     s2_common = [n for n in s2 if n in common]
-
+    # s1_common = s1
+    # s2_common = s2
 
     if len(s1_common) > len(s2_common):
         s1_common, s2_common = s2_common, s1_common
 
-    print(s1_common)
-    print(s2_common)
+    print(s1)
+    print(s2)
 
     common_child = []
-    for i in range(len(s1_common)):
+    i = 0
+    while i < len(s1_common):
         s1_i = s1_common[i]
-        for j in range(len(s2_common)):
-            if s1_i == s2_common[i]:
-                common_child.append(s1_i)
-                s2_common = s2_common[j:]
-                break
+        if s1_i in s2_common:
+            j = s2_common.index(s1_i)
+            s1_common.pop(i)
+            s2_common.pop(j)
+            common_child.append(s1_i)
+        i += 1
 
-
-    print(s1_common)
-    print(s2_common)
-    print(common_child)
-    
-    # s1_dic = defaultdict(list) 
-    # for i,e in enumerate(s1):
-    #     s1_dic[e].append(i)
-
-    # child = [0]
-    # for i in s2:
-    #     j = s1_dic[i]
-    #     if len(j) == 0:
-    #         continue
-        
-    #     for k in j:
-    #         if k > child[-1]:
-    #             print(child, k)
-    #             child.append(k)
-    # child = [-1]
-    # numbers = [-1]
-    # i = 0
-    # while i < len(s1_common):
-    #     s_i = s1_common[i]
-    #     remove = False
-    #     for j in range(len(s2_common)):
-    #         if s_i == s2_common[j]:
-    #             s1_common.pop(i)
-    #             s2_common.pop(j)
-    #             child.append(j)
-    #             numbers.append(s_i)
-    #             remove = True
+    # k = 0
+    # for i in range(len(s1_common)):
+    #     s1_i = s1_common[i]
+    #     for j in range(k, len(s2_common)):
+    #         if s1_i == s2_common[j]:
+    #             common_child.append(s1_i)
+    #             k = j + 1
     #             break
-    #     if not remove:
-    #         i += 1
 
-    # print(child)
-    # print(numbers)
+
+    print(''.join(map(str, s1_common)))
+    print(''.join(map(str, s2_common)))
+    print(common_child)
     
     return  len(common_child)
 
 if __name__ == '__main__':
     scr_dir = os.path.dirname(__file__)
     fptr = open(os.path.join(scr_dir, './output/output.txt'), 'w')
-    fptr_input = open(os.path.join(scr_dir, './input/input14.txt'), 'r')
+    fptr_input = open(os.path.join(scr_dir, './input/input02.txt'), 'r')
     
     s1 = fptr_input.readline().rstrip()
 

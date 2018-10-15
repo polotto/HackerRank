@@ -5,7 +5,6 @@ import os
 import random
 import re
 import sys
-import bisect
 from timeit import default_timer as timer
 
 def number_needed(a, b):
@@ -18,8 +17,8 @@ def number_needed(a, b):
 
 # Complete the makeAnagram function below.
 def makeAnagram(a, b):
-    a_s = sorted(a)
-    b_s = sorted(b)
+    a_s = list(a)
+    b_s = list(b)
     
     if len(a_s) > len(b_s):
         a_s, b_s = b_s, a_s
@@ -28,10 +27,10 @@ def makeAnagram(a, b):
     while i < len(a_s):
         n_i = a_s[i]
         if n_i in b_s:
-            j = bisect.bisect_left(b_s, n_i)
+            j = b_s.index(n_i)
             del b_s[j]
-            j = bisect.bisect_left(a_s, n_i)
-            del a_s[j]            
+            j = a_s.index(n_i)
+            del a_s[j]
             i -= 1
         i += 1
     total = len(a_s) + len(b_s)

@@ -10,34 +10,27 @@ from collections import Counter
 # Complete the isValid function below.
 def isValid(s):
     freq = Counter(s)
-    freq_values = Counter()
-    
-    for i in freq.values():
-        freq_values[i] += 1
+    values = sorted(freq.values())
+    v_max = max(values)
+    v_min = min(values)
+    max_count = values.count(v_max)
+    min_count = values.count(v_min)
 
-    print(freq)
-    print(freq.most_common())
-    print(freq_values)
-    print(freq_values.most_common())
-    
-    if len(freq_values) == 1:
+    print(values)
+    print(v_max, v_min)
+    print(max_count, min_count)
+
+    if min_count == 1:
         return 'YES'
-    elif len(freq_values) > 2:
-        return 'NO'
+    elif v_max - max_count == v_min:
+        return 'YES'
     else:
-        most = freq_values.most_common()
-        most_freq_kv = most[0]
-        less_freq_kv = most[-1]
-        print(most_freq_kv)
-        print(less_freq_kv)
-
-        if less_freq_kv[0] - less_freq_kv[1] == most_freq_kv[0] or less_freq_kv[0] - less_freq_kv[1] == 0:
-            return 'YES'
         return 'NO'
-    
+
+
 if __name__ == '__main__':
-    # tests = ['00', '01', '03', '04', '18']
-    tests = ['00']
+    tests = ['00', '01', '03', '04', '18', '06']
+    # tests = ['00']
     for test in tests:
         print(test)
         scr_dir = os.path.dirname(__file__)

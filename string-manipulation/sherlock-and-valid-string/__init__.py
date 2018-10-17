@@ -9,39 +9,48 @@ from collections import Counter
 
 # Complete the isValid function below.
 def isValid(s):
-    freq = Counter()
-    freq_v = Counter()
-    for i in s:
-        freq[i] += 1
-        
+    freq = Counter(s)
+    freq_values = Counter()
+    
     for i in freq.values():
-        freq_v[i] += 1
-    
+        freq_values[i] += 1
+
     print(freq)
-    print(freq_v)
+    print(freq.most_common())
+    print(freq_values)
+    print(freq_values.most_common())
     
-    if len(freq_v) == 1:
+    if len(freq_values) == 1:
         return 'YES'
+    elif len(freq_values) > 2:
+        return 'NO'
     else:
-        v = list(freq_v.values())
-        for i in range(1, len(v)):
-            if v[i] > 1:
-                return 'NO'
-        return 'YES'
+        most = freq_values.most_common()
+        most_freq_kv = most[0]
+        less_freq_kv = most[-1]
+        print(most_freq_kv)
+        print(less_freq_kv)
+
+        if less_freq_kv[0] - less_freq_kv[1] == most_freq_kv[0] or less_freq_kv[0] - less_freq_kv[1] == 0:
+            return 'YES'
+        return 'NO'
     
 if __name__ == '__main__':
-    test = '03'
-    scr_dir = os.path.dirname(__file__)
-    fptr = open(os.path.join(scr_dir, './output/output.txt'), 'w')
-    fptr_input = open(os.path.join(scr_dir, './input/input%s.txt' % test), 'r')
-    fptr_result = open(os.path.join(scr_dir, './output/output%s.txt' % test), 'r')
+    # tests = ['00', '01', '03', '04', '18']
+    tests = ['00']
+    for test in tests:
+        print(test)
+        scr_dir = os.path.dirname(__file__)
+        fptr = open(os.path.join(scr_dir, './output/output.txt'), 'w')
+        fptr_input = open(os.path.join(scr_dir, './input/input%s.txt' % test), 'r')
+        fptr_result = open(os.path.join(scr_dir, './output/output%s.txt' % test), 'r')
 
-    s = fptr_input.readline().rstrip()
+        s = fptr_input.readline().rstrip()
 
-    result = isValid(s)
+        result = isValid(s)
 
-    fptr.write(result + '\n')
+        fptr.write(result + '\n')
 
-    fptr.close()
-
-    print(result, result == fptr_result.readline())
+        fptr.close()
+        test_result = fptr_result.readline().rstrip()
+        print(result, test_result, result == test_result)

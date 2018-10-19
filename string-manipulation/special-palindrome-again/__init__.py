@@ -9,7 +9,7 @@ from timeit import default_timer as timer
 from collections import Counter
 
 # Complete the substrCount function below.
-def substrCount(n, s):
+def substrCount2(n, s):
     igual_p = Counter(s)
     print(igual_p)
     s_palindrome = sum(igual_p.values())
@@ -26,7 +26,6 @@ def substrCount(n, s):
         i += 2
     
     return s_palindrome
-
 
 def substrCountSolution1(n, s):
     s_palindrome = n
@@ -46,7 +45,31 @@ def substrCountSolution1(n, s):
                         s_palindrome += 1
     
     return s_palindrome
-                    
+
+def substrCount(n, s):
+    count = len(s)
+
+    exp1 = r'(([a-z])\2*)(?!\1)(?=[a-z]\1)'
+    m = re.finditer(exp1,s)
+    count += sum([len(x.group(0)) for x in m])
+
+    print(re.findall(exp1,s))
+    print(count)
+
+    exp2 = r'([a-z])\1+'
+    m = re.finditer(exp2,s)
+    # http://www.mathematicsmagazine.com/corresp/KiranBacche/TriangularNumbersandCombinations.pdf
+    count += sum([triangular_number(len(x.group(0))-1) for x in m])
+
+    m = re.finditer(exp2,s)
+    for x in m:
+        print(x.group(0))
+
+    print(re.findall(exp2,s))
+
+    return count
+
+def triangular_number(n): return (pow(n,2)+n)//2
         
 if __name__ == '__main__':
     start = timer()

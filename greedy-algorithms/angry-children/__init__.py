@@ -10,25 +10,26 @@ import sys
 def maxMin(k, arr):
     ans = 10**9
     arr_s = sorted(arr)
-    sub_arr = arr_s[0:0+k]
-    ans = min(max(sub_arr) - min(sub_arr), ans)
+    for i in range(len(arr) - k + 1):
+        sub_arr_min = arr_s[i]
+        sub_arr_max = arr_s[i+k-1]
+        ans = min(sub_arr_max - sub_arr_min, ans)
     return ans
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    scr_dir = os.path.dirname(__file__)
+    fp_in = open(os.path.join(scr_dir, './input/input16.txt'), 'r')
 
-    n = int(input())
+    n = int(fp_in.readline())
 
-    k = int(input())
+    k = int(fp_in.readline())
 
     arr = []
 
     for _ in range(n):
-        arr_item = int(input())
+        arr_item = int(fp_in.readline())
         arr.append(arr_item)
 
     result = maxMin(k, arr)
 
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
+    print(result)

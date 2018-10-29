@@ -25,13 +25,16 @@ def whatFlavors(cost, money):
     print(ice_a[0] + 1, ice_b[0] + 1)
 
 if __name__ == '__main__':
-    t = int(input())
+    test_case = '00'
+    scr_dir = os.path.dirname(__file__)
+    fp_in = open(os.path.join(scr_dir, './input/input%s.txt' % test_case), 'r')
+    t = int(fp_in.readline().rstrip())
 
     for t_itr in range(t):
-        money = int(input())
+        money = int(fp_in.readline().rstrip())
 
-        n = int(input())
+        n = int(fp_in.readline().rstrip())
 
-        cost = list(map(int, input().rstrip().split()))
+        cost = list(map(int, fp_in.readline().rstrip().split()))
 
         whatFlavors(cost, money)

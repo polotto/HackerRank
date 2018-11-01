@@ -12,7 +12,7 @@ def swaps(arr_e):
     ans = 0
     j = 0
     for i in range(len(arr_e)):
-        if vis[i]:
+        if vis[i] or arr_e[i][0] == i:
             continue
 
         j = i

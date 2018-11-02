@@ -23,3 +23,6 @@ count += mid - i + 1;
 Part 1: https://www.youtube.com/watch?v=4IvYaOY8Pxw
 
 Part 2: https://www.youtube.com/watch?v=PLkuid82dbc
+
+### Sliding window technique
+https://www.geeksforgeeks.org/window-sliding-technique/
